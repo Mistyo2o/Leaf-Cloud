@@ -8,18 +8,19 @@
         <artifactId>Leaf-Cloud</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>leaf-technology</artifactId>
+    <artifactId>leaf-support</artifactId>
     <packaging>pom</packaging>
-    <description>框架基础技术支持层</description>
+    <description>微服务治理框架支撑层</description>
     <modules>
-        <!--通用模块-->
-        <module>leaf-common</module>
-        <!--服务安全统一认证模块-->
-        <module>leaf-auth</module>
+        <!--服务网关-->
+        <module>support-gateway</module>
     </modules>
 
     <properties>
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-boot.version>2.6.13</spring-boot.version>
+
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,6 +28,20 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -36,6 +51,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 
     <build>
         <plugins>

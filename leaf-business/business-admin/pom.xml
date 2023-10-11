@@ -8,7 +8,7 @@
         <artifactId>leaf-business</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    <description>后台管理服务</description>
     <artifactId>business-admin</artifactId>
 
     <properties>
@@ -16,5 +16,48 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+            <!-- 技术框架security安全框架支持 -->
+<!--            <dependency>-->
+<!--                <groupId>org.panda.tech</groupId>-->
+<!--                <artifactId>bamboo-security</artifactId>-->
+<!--                <version>${technology.version}</version>-->
+<!--            </dependency>-->
+            <!-- 技术框架mybatis扩展支持 -->
+<!--            <dependency>-->
+<!--                <groupId>org.panda.tech</groupId>-->
+<!--                <artifactId>bamboo-data-mybatis</artifactId>-->
+<!--                <version>${technology.version}</version>-->
+<!--            </dependency>-->
+            <!-- MySQL连接驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <scope>runtime</scope>
+            </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 构建不带版本号的jar包 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <executable>true</executable>
+                    <finalName>${artifactId}</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

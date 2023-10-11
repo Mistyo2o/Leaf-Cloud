@@ -16,6 +16,8 @@
         <module>leaf-business</module>
         <!--框架基础技术支持层-->
         <module>leaf-technology</module>
+        <!--微服务治理层-->
+        <module>leaf-support</module>
     </modules>
 
     <properties>
