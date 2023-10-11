@@ -8,69 +8,40 @@
     <artifactId>Leaf-Cloud</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <description>微服务架构学习项目</description>
     <modules>
-        <module>leaf-gateway</module>
-        <module>leaf-service</module>
-        <module>leaf-service-api</module>
-        <module>leaf-auth</module>
+        <!--TODO 微服务治理框架支撑层-->
+        <!--TODO 微服务架构服务提供层 比如 短信下发-->
+        <!--具体业务架构应用层-->
+        <module>leaf-business</module>
+        <!--框架基础技术支持层-->
+        <module>leaf-technology</module>
     </modules>
 
     <properties>
+        <!--spring主要套件版本固定-->
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <spring-boot.version>2.6.13</spring-boot.version>
+        <spring.version>5.3.23</spring.version>
+
+        <oracle-jdk.version>8</oracle-jdk.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <!--SpringBoot 父starter包 控制子项目jar版本号与父一致-->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
-        <relativePath/>
-    </parent>
-
-    <!--一些全局必备依赖-->
-    <dependencies>
-        <!--SpringBoot自动配置-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-        <!--SpringBoot启动器-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <!--单元测试：这个可以不必备-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <!--SpringCloud的依赖管理-->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.SR1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-
-    <!--建立插件-->
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>${oracle-jdk.version}</release>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+
+
 </project>

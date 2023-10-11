@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.zh</groupId>
-        <artifactId>Leaf-Cloud</artifactId>
+        <artifactId>leaf-business</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>leaf-auth</artifactId>
+    <artifactId>business-admin</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
