@@ -8,6 +8,7 @@
         <artifactId>Leaf-Cloud</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <groupId>org.zh.technology</groupId>
     <artifactId>leaf-technology</artifactId>
     <packaging>pom</packaging>
     <description>框架基础技术支持层</description>
@@ -16,6 +17,7 @@
         <module>leaf-common</module>
         <!--服务安全统一认证模块-->
         <module>leaf-auth</module>
+        <module>leaf-data</module>
     </modules>
 
     <properties>

@@ -19,17 +19,17 @@
 
     <dependencies>
             <!-- 技术框架security安全框架支持 -->
-<!--            <dependency>-->
-<!--                <groupId>org.panda.tech</groupId>-->
-<!--                <artifactId>bamboo-security</artifactId>-->
-<!--                <version>${technology.version}</version>-->
-<!--            </dependency>-->
-            <!-- 技术框架mybatis扩展支持 -->
-<!--            <dependency>-->
-<!--                <groupId>org.panda.tech</groupId>-->
-<!--                <artifactId>bamboo-data-mybatis</artifactId>-->
-<!--                <version>${technology.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.zh.technology</groupId>
+                <artifactId>leaf-auth</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!-- 技术框架-数据模块扩展支持 -->
+            <dependency>
+                <groupId>org.zh.technology</groupId>
+                <artifactId>leaf-data</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
             <!-- MySQL连接驱动 -->
             <dependency>
                 <groupId>mysql</groupId>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.zh.technology</groupId>
+        <artifactId>leaf-technology</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <description>
+        数据模块
+        1、多数据源动态切换
+        2、数据库ORM（jpa, mybatis）框架基础功能以及扩展能力支持
+        3、数据库表数据访问层代码自动生成
+    </description>
+    <artifactId>leaf-data</artifactId>
+
+    <properties>
+        <druid-spring.version>1.2.16</druid-spring.version>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+        <mybatis-generator.version>3.4.1</mybatis-generator.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.zh.technology</groupId>
+            <artifactId>leaf-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid-spring.version}</version>
+        </dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-generator.version}</version>
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>com.baomidou</groupId>-->
+            <!--                    <artifactId>mybatis-plus-core</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
+        </dependency>
+        <!--jpa-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+    </dependencies>
+</project>

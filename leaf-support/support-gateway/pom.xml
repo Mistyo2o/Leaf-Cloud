@@ -4,11 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.zh</groupId>
+        <groupId>org.zh.support</groupId>
         <artifactId>leaf-support</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.RELEASE</version>
     </parent>
-    <description>微服务网关</description>
+    <description>
+        微服务网关
+        1.统一请求路由
+        2.权限控制
+        3.服务端点限流
+    </description>
     <artifactId>support-gateway</artifactId>
 
     <properties>
@@ -20,11 +25,11 @@
 
     <dependencies>
         <!-- 微服务架构服务提供通用支持 -->
-<!--        <dependency>-->
-<!--            <groupId>org.panda.support</groupId>-->
-<!--            <artifactId>support-cloud-core</artifactId>-->
-<!--            <version>${support.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.zh.support</groupId>
+            <artifactId>support-core</artifactId>
+            <version>1.0.RELEASE</version>
+        </dependency>
         <!-- 监控和管理应用程序的生产级特性 -->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->

@@ -26,16 +26,17 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <support.version>1.0.0</support.version>
     </properties>
 
     <dependencies>
         <!-- 微服务架构服务提供通用支持 -->
-<!--        <dependency>-->
-<!--            <groupId>org.panda.support</groupId>-->
-<!--            <artifactId>support-cloud-core</artifactId>-->
-<!--            <version>${support.version}</version>-->
-<!--        </dependency>-->
-
+        <dependency>
+            <groupId>org.zh.support</groupId>
+            <artifactId>support-core</artifactId>
+            <version>1.0.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: support-gateway
+  profiles:
+    active: dev
+  main:
+#  防止 gateway组件中spring-boot-start-webflux 与 spring-boot-start-web 冲出
+    web-application-type: reactive
+server:
+  port: 12001
