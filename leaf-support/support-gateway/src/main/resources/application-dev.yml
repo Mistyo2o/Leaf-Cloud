@@ -2,11 +2,11 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 116.62.50.80:8848
+        server-addr: 127.0.0.0:8848
         namespace: ab3ce511-965b-4423-98b7-782925ac83ed
         group: SUPPORT
       discovery:
-        server-addr: 116.62.50.80:8848
+        server-addr: 127.0.0.0:8848
         namespace: ab3ce511-965b-4423-98b7-782925ac83ed
         group: SUPPORT
   config:
