@@ -8,7 +8,7 @@
         <artifactId>Leaf-Cloud</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>org.zh.technology</groupId>
+    <groupId>org.zh.tech</groupId>
     <artifactId>leaf-technology</artifactId>
     <packaging>pom</packaging>
     <description>框架基础技术支持层</description>

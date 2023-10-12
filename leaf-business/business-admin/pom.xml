@@ -20,13 +20,13 @@
     <dependencies>
             <!-- 技术框架security安全框架支持 -->
             <dependency>
-                <groupId>org.zh.technology</groupId>
+                <groupId>org.zh.tech</groupId>
                 <artifactId>leaf-auth</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <!-- 技术框架-数据模块扩展支持 -->
             <dependency>
-                <groupId>org.zh.technology</groupId>
+                <groupId>org.zh.tech</groupId>
                 <artifactId>leaf-data</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
