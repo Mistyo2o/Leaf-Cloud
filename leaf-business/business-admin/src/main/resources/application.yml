@@ -2,7 +2,7 @@ spring:
   application:
     name: business-admin
   profiles:
-    active: dev
+    active: local
 server:
   port: 10001
 mybatis-plus:
