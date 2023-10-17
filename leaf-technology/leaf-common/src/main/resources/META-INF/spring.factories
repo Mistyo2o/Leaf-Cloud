@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.zh.thch.common.context.ContextInitializedBeanListener
