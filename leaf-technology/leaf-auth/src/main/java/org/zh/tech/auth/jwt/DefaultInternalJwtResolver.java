@@ -1,16 +1,20 @@
 package org.zh.tech.auth.jwt;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.zh.thch.common.basic.Strings;
 import org.zh.thch.common.beans.ContextInitializedBean;
 import org.zh.thch.common.util.JacksonUtil;
+import org.zh.thch.common.util.LogUtil;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,7 +31,7 @@ public class DefaultInternalJwtResolver implements JwtResolver, ContextInitializ
     private Map<String, JWTVerifier> verifierMap = new HashMap<>();
     @Override
     public boolean isGenerable(String appName) {
-        return false;
+        return getConfiguration(appName) != null;
     }
 
     @Override
@@ -50,20 +54,59 @@ public class DefaultInternalJwtResolver implements JwtResolver, ContextInitializ
         return null;
     }
 
+    private JWTVerifier getVerifier(String appName) {
+        JWTVerifier verifier = this.verifierMap.get(appName);
+        if (verifier == null) {
+            InternalJwtConfiguration configuration = getConfiguration(appName);
+            String secretKey = configuration.getSecretKey();
+            verifier = JWT.require(Algorithm.HMAC256(secretKey)).build();
+            this.verifierMap.put(appName, verifier);
+        }
+        return verifier;
+    }
+
     @Override
     public boolean isParsable() {
-        return false;
+        return this.configurationMap.size() > 0;
     }
 
     @Override
     public <T> T parse(String jwt, Class<T> type) {
+        if (jwt != null && jwt.startsWith(JWT_PREFIX)) {
+            int index = jwt.indexOf(Strings.SLASH);
+            if (index > 0 && index < jwt.length() - 1) {
+                String appName = jwt.substring(JWT_PREFIX.length(), index);
+                try {
+                    JWTVerifier verifier = getVerifier(appName);
+                    String token = jwt.substring(index + 1);
+                    List<String> audience = verifier.verify(token).getAudience();
+                    String audienceJson = CollectionUtil.getFirst(audience);
+                    if (StringUtils.isNotBlank(audienceJson)) {
+                        return JacksonUtil.CLASSED_MAPPER.readValue(audienceJson, type);
+                    }
+                } catch (Exception e) { // 出现任何错误均只打印日志，视为没有授权
+                    LogUtil.error(getClass(), e.getMessage());
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public boolean verify(String jwt) {
+        if (jwt != null && jwt.startsWith(JWT_PREFIX)) {
+            int index = jwt.indexOf(Strings.SLASH);
+            if (index > 0 && index < jwt.length() - 1) {
+                String appName = jwt.substring(JWT_PREFIX.length(), index);
+                JWTVerifier verifier = getVerifier(appName);
+                String token = jwt.substring(index + 1);
+                verifier.verify(token);
+                return true;
+            }
+        }
         return false;
     }
+
 
 
 
