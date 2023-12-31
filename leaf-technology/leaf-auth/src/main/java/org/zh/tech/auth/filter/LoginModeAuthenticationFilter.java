@@ -1,11 +1,12 @@
 package org.zh.tech.auth.filter;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.util.StringUtils;
 import org.zh.tech.auth.authentication.AuthenticationTokenResolver;
+import org.zh.tech.auth.exception.BusinessAuthenticationException;
 import org.zh.thch.common.basic.LoginModeEnum;
 import org.zh.thch.common.basic.exception.BusinessException;
 
@@ -15,9 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 支持多种登录方式的认证过滤器。
+ * @author zhouHui
+ * @version 1.0
+ * @description TODO
+ * @date 2023/12/9 16:27:56
  */
-// 多种登录方式用一个过滤器处理的好处是登录处理URL可以与登录表单URL保持一致，从而有利于登录失败后的处理。
 public class LoginModeAuthenticationFilter extends LoginAuthenticationFilter{
 
     public static final String PARAMETER_LOGIN_MODE = "loginMode";
@@ -28,7 +31,6 @@ public class LoginModeAuthenticationFilter extends LoginAuthenticationFilter{
 
     public LoginModeAuthenticationFilter(ApplicationContext context) {
         super(context);
-
         this.tokenResolverMapping.clear();
         context.getBeansOfType(AuthenticationTokenResolver.class).forEach((id, resolver) -> {
             String loginMode = resolver.getLoginMode();
@@ -41,28 +43,31 @@ public class LoginModeAuthenticationFilter extends LoginAuthenticationFilter{
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-            throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        //获取登录方式
         String loginMode = obtainLoginMode(request);
         AuthenticationTokenResolver<AbstractAuthenticationToken> resolver;
-        if (loginMode == null) {
+        if (loginMode == null){
             resolver = this.defaultTokenResolver;
-        } else {
+        }else {
             resolver = this.tokenResolverMapping.get(loginMode);
         }
-        if (resolver != null) {
+
+        if (loginMode != null){
             try {
-                AbstractAuthenticationToken authRequest = resolver.resolveAuthenticationToken(request);
+                //从解决器中获取对应的认证实现
+                AbstractAuthenticationToken authRequest  = resolver.resolveAuthenticationToken(request);
                 setDetails(request, authRequest);
                 return getAuthenticationManager().authenticate(authRequest);
-            } catch (BusinessException e) {
-                //throw new BusinessAuthenticationException(e);
-                return super.attemptAuthentication(request, response);
+            }catch (BusinessException e){
+                throw new BusinessAuthenticationException(e);
             }
         }
+
         // 找不到匹配登录方式的构建器，则采用父类的用户名密码登录方式
         return super.attemptAuthentication(request, response);
     }
+
 
     public String obtainLoginMode(HttpServletRequest request) {
         String loginMode = request.getParameter(PARAMETER_LOGIN_MODE);
@@ -72,6 +77,8 @@ public class LoginModeAuthenticationFilter extends LoginAuthenticationFilter{
         return loginMode;
     }
 
+
+    //参考UsernamePasswordAuthenticationFilter写法
     protected void setDetails(HttpServletRequest request, AbstractAuthenticationToken authRequest) {
         authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
     }

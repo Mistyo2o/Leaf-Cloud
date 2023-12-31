@@ -18,6 +18,7 @@
         <!--服务安全统一认证模块-->
         <module>leaf-auth</module>
         <module>leaf-data</module>
+        <module>leaf-core</module>
     </modules>
 
     <properties>

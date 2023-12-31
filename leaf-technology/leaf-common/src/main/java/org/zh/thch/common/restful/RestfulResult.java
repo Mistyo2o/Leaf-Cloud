@@ -1,6 +1,7 @@
 package org.zh.thch.common.restful;
 
 import lombok.Getter;
+import org.zh.thch.common.basic.exception.ExceptionEnum;
 
 import java.io.Serializable;
 
@@ -43,7 +44,7 @@ public class RestfulResult<T> implements Serializable {
         return transform(code, message, null);
     }
 
-    public static RestfulResult<?> getFailure(Result failedResult) {
+    public static RestfulResult<?> getFailure(ExceptionEnum failedResult) {
         return transform(failedResult.getCode(), failedResult.getMessage(), null);
     }
 

@@ -11,15 +11,13 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.zh.thch.common.util.ClassUtil;
 
-import static cn.hutool.extra.spring.SpringUtil.getApplicationContext;
-
 /**
- * 登录安全配置器支持
- *
- * @param <F> 处理过滤器类型
- * @param <P> 认证提供器类型
+ * @author zhouHui
+ * @version 1.0
+ * @description TODO
+ * @date 2023/12/9 13:51:04
  */
-public abstract class LoginSecurityConfigurerSupport<F extends AbstractAuthenticationProcessingFilter, P extends AuthenticationProvider>
+public abstract class LoginSecurityConfigurerSupport <F extends AbstractAuthenticationProcessingFilter, P extends AuthenticationProvider>
         extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
     @Autowired
@@ -30,28 +28,26 @@ public abstract class LoginSecurityConfigurerSupport<F extends AbstractAuthentic
         return this.context;
     }
 
-    @Override
-    public final void init(HttpSecurity builder) throws Exception {
-        builder.authenticationProvider(getAuthenticationProvider());
-    }
 
     @Override
-    public final void configure(HttpSecurity builder) throws Exception {
-        this.processingFilter = createProcessingFilter();
-        if (this.processingFilter != null) {
-            this.processingFilter.setAuthenticationManager(builder.getSharedObject(AuthenticationManager.class)); // 固定必须
-            configure(builder, this.processingFilter);
-        }
+    public final void init(HttpSecurity http) throws Exception {
+        http.authenticationProvider(getAuthenticationProvider());
     }
 
-
-    //获取认证提供者类
     protected P getAuthenticationProvider() {
         Class<P> type = ClassUtil.getActualGenericType(getClass(), 1); // 取第二个泛型：认证提供器类型
         assert type != null;
         return getApplicationContext().getBean(type);
     }
 
+    @Override
+    public final void configure(HttpSecurity http) {
+        this.processingFilter = createProcessingFilter();
+        if (this.processingFilter != null) {
+            this.processingFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class)); // 固定必须
+            configure(http, this.processingFilter);
+        }
+    }
 
     /**
      * 创建处理过滤器<br>
@@ -59,7 +55,7 @@ public abstract class LoginSecurityConfigurerSupport<F extends AbstractAuthentic
      *
      * @return 处理过滤器
      */
-    protected abstract F createProcessingFilter();
+    public abstract F createProcessingFilter();
 
     public F getProcessingFilter() {
         return this.processingFilter;

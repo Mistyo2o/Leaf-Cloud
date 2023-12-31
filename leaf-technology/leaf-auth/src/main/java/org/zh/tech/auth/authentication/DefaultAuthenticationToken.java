@@ -2,20 +2,22 @@ package org.zh.tech.auth.authentication;
 
 /**
  * @author zhouHui
- * @description 默认用户名密码认证
+ * @version 1.0
+ * @description TODO
+ * @date 2023/12/9 16:04:01
  */
 public class DefaultAuthenticationToken extends UnauthenticatedAuthenticationToken{
-    private static final long serialVersionUID = -1206641448564918380L;
 
-    public DefaultAuthenticationToken(String username, String password) {
+    public DefaultAuthenticationToken(Object username, Object password) {
         super(username, password);
     }
 
-    public String getUsername() {
+    public String getUsername(){
         return (String) getPrincipal();
     }
 
-    public String getPassword() {
+    public String getPassword(){
         return (String) getCredentials();
     }
+
 }

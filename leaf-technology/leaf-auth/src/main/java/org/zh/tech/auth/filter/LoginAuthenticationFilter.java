@@ -2,27 +2,37 @@ package org.zh.tech.auth.filter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationTargetUrlRequestHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.zh.thch.common.meta.ApiMetaProperties;
 import org.zh.thch.common.util.SpringUtil;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author zhouHui
- * @description 登录认证过滤器
+ * @version 1.0
+ * @description TODO
+ * @date 2023/12/7 16:32:05
  */
 public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    public LoginAuthenticationFilter(ApplicationContext context) {
+        AjaxAuthenticationSuccessHandler successHandler = SpringUtil.getFirstBeanByClass(context,
+                AjaxAuthenticationSuccessHandler.class);
+        if (successHandler != null) {
+            setAuthenticationSuccessHandler(successHandler);
+        }
+        applySuccessTargetUrlParameter(context, getSuccessHandler());
 
-    //设置登录成功跳转地址
+        ResolvableExceptionAuthenticationFailureHandler failureHandler = SpringUtil
+                .getFirstBeanByClass(context, ResolvableExceptionAuthenticationFailureHandler.class);
+        if (failureHandler != null) {
+            setAuthenticationFailureHandler(failureHandler); // 指定登录失败时的处理器
+        }
+    }
+
     public static void applySuccessTargetUrlParameter(ApplicationContext context,
                                                       AuthenticationSuccessHandler successHandler) {
         if (successHandler instanceof AbstractAuthenticationTargetUrlRequestHandler) {
@@ -37,23 +47,6 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         }
     }
 
-    //设置登录成功 登录失败处理类
-    public LoginAuthenticationFilter(ApplicationContext context) {
-        System.out.println(context);
-//        AjaxAuthenticationSuccessHandler successHandler = SpringUtil.getFirstBeanByClass(context,
-//                AjaxAuthenticationSuccessHandler.class);
-//        if (successHandler != null) {
-//            setAuthenticationSuccessHandler(successHandler);
-//        }
-//        applySuccessTargetUrlParameter(context, getSuccessHandler());
-//
-//        ResolvableExceptionAuthenticationFailureHandler failureHandler = SpringUtil
-//                .getFirstBeanByClass(context, ResolvableExceptionAuthenticationFailureHandler.class);
-//        if (failureHandler != null) {
-//            setAuthenticationFailureHandler(failureHandler); // 指定登录失败时的处理器
-//        }
-    }
-
     @Override
     public AuthenticationSuccessHandler getSuccessHandler() {
         return super.getSuccessHandler();
@@ -63,4 +56,5 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
     public AuthenticationFailureHandler getFailureHandler() {
         return super.getFailureHandler();
     }
+
 }

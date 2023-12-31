@@ -4,20 +4,19 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.zh.tech.auth.jwt.DefaultInternalJwtResolver;
-import org.zh.tech.auth.jwt.JwtResolver;
+import org.zh.tech.core.jwt.JwtParser;
 
 /**
  * @author zhouHui
- * @description WebMvc配置器
+ * @version 1.0
+ * @description TODO
+ * @date 2023/12/21 13:14:50
  */
-
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean
-    @ConditionalOnMissingBean(JwtResolver.class)
-    public JwtResolver internalJwtResolver() {
-        return new DefaultInternalJwtResolver();
+    public JwtParser internalJwtResolver() {
+        return new JwtParser();
     }
 }
