@@ -1,4 +1,4 @@
-package org.zh.business.admin.security;
+package org.zh.business.admin.infrastructure.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

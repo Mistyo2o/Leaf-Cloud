@@ -1,9 +1,9 @@
-package org.zh.business.admin.security;
+package org.zh.business.admin.infrastructure.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
-import org.zh.business.admin.security.authentication.LoginAuthenticationProvider;
+import org.zh.business.admin.infrastructure.security.authentication.LoginAuthenticationProvider;
 import org.zh.tech.auth.authentication.DefaultAuthenticationTokenResolver;
 import org.zh.tech.auth.authentication.SmsAuthenticationTokenResolver;
 import org.zh.tech.auth.config.LoginSecurityConfigurerSupport;

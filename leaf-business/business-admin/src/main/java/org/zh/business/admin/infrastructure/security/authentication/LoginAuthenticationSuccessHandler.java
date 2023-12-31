@@ -1,4 +1,4 @@
-package org.zh.business.admin.security.authentication;
+package org.zh.business.admin.infrastructure.security.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
